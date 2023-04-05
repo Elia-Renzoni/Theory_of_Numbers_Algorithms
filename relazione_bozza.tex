@@ -1,4 +1,7 @@
+
 \documentclass{article}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 \title{\bfseries Relazione Progetto Programmazione Procedurale \\\itshape Verifica delle congetture di Gilbreath, Goldbach e Legendre }
 
 \author{Alessio Biagioli, Elia Renzoni}
@@ -54,10 +57,36 @@ La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri 
     \Large \item[3.1] \underline{Strutture e Rappresentazione dei Dati : } 
     \large \\I dati di ingresso e quelli di uscita di cui l'algoritmo si poggia sono rappresentati nel seguente modo : 
     \begin{enumerate}
-        \item[a.] Dati di Ingresso : I dati di ingresso delle congetture sono rappresentati su un tipo strutturato composto da tre campi, corrispondenti al numero dei dati di ingresso per le congetture; i il tipo dei campi è omogeneo, in quanto i dati di ingresso per ciascuna congettura sono tutti di tipo intero. Inoltre abbiamo deciso di rappresentare i dati di ingresso che corrispondono agli identificativi delle congetture - utili per selezionare la congettura da risolvere - tramite delle macro costanti; in questo modo si permette una più rapida ed efficacie manutenione del programmma.
+        \item[a.] Dati di Ingresso : I dati di ingresso delle congetture sono rappresentati su un tipo strutturato composto da tre campi, corrispondenti al numero dei dati di ingresso per le congetture; i il tipo dei campi è omogeneo, in quanto i dati di ingresso per ciascuna congettura sono tutti di tipo intero. Inoltre abbiamo deciso di rappresentare i dati di ingresso che corrispondono agli identificativi delle congetture - utili per selezionare la congettura da risolvere - tramite delle macro costanti, in questo modo si permette una più rapida ed efficacie manutenione del programmma.
         \item[b.] Dati di Uscita : I dati di uscita sono per lo più numeri primi; abbiamo quindi deciso di memorizzare la sequenza di numeri primi generata in una lista doppiamente concatenata, in questo modo avendo a disposizione l'indirizzo di memoria della testa della lista concatenata, è facile fare accesso a tutti i suoi elementi. la lista doppiamente concatenata è composta da oggetti aventi tre attributi, ovvero due attributi puntatore e un attributo chiave, dove quest'ultimo conterrà un numero primo. 
     \end{enumerate}
     \Large \item[3.2] \underline{Passi dell'Algoritmo : }
+    \large\\ qui di seguito sono riportati i passi principali dell'algoritmo, descritti tramite linguaggio naturale : 
+
+    % INIZIO ALGORITMO 
+    \begin{algorithm} [hbt!]
+    \caption{Passi Principali dell'Algoritmo}
+    \begin{algorithmic}
+    \State Acquisire e Validare l'identificativo della congettura scelto dall'utente;
+    \State Creare la sequenza di numeri primi e memorizzarla in una lista doppiamente concatenata;
+    \If{la congettura scelta é quella di Gilbreath}
+    \State acquisisci e valida i dati di ingresso per essa;
+    \State verifica la congettura di Gilbreath, generando un numero $n$ \State di sequenze partendo dalla sequenza di numeri primi generata;
+    \ElsIf{la congettura scelta é quella di Goldbach}
+    \State acquisci e valida i dati di ingresso per essa;
+    \State verifica la congettura di Goldbach, trovando dalla \State sequenza di numeri primi generata, tre elementi \State la cui somma sia uguale al dato di ingresso;
+    \Else
+    \State acquisici e valida i dati di ingresso per la congettura di Legendre;
+    \State verifica la congettura di Legendre, trovando un numero primo - \State dalla sequenza di numeri primi generata - compreso tra \State $n^2$ e $(n + 1)^2$;
+    \EndIf 
+    
+     
+    \end{algorithmic}
+    \end{algorithm}
+
+
+
+    
 \end{enumerate}
 
 \newpage
@@ -75,3 +104,5 @@ La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri 
     \section{Verifica del Software}
 \end{center}
 \end{document}
+
+
