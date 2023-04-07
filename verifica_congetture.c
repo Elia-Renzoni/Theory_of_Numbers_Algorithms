@@ -45,11 +45,11 @@ typedef struct seq_numeri_p {
 int                      acquisisci_valida(void);
 sequenza_numeri_primi_t *genera_numeri_primi(void);
 void                     congettura_gilbreath(congetture_t,
-					      congetture_t *);
+					      sequenza_numeri_primi_t *);
 void                     congettura_goldbach(congetture_t,
-					     congetture_t *);
+					     sequenza_numeri_primi_t *);
 void                     congettura_legendre(congetture_t,
-					     congetture_t *);
+					     sequenza_numeri_primi_t *);
 
 /* definizione delle funzioni */
 
