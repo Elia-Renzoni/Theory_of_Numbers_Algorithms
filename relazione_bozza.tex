@@ -16,7 +16,9 @@
 
 
 \large
-La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri primi, la sequenza dei numeri naturali ottenuta calcolando il valore assoluto della differenza tra ciascuna coppia di numeri primi consecutivi nella precedente sequenza, l’ulteriore sequenza dei numeri naturali ottenuta calcolando il valore assoluto della differenza tra ciascuna coppia di numeri consecutivi nella precedente sequenza, e così via, il primo numero di ciascuna delle sequenze ottenute è sempre 1. La congettura debole di Goldbach asserisce che tutti i numeri naturali dispari maggiori di 5 possono essere scritti come somma di tre numeri primi. La congettura di Legendre asserisce che per ogni n ∈ N tale che n ≥ 1 esiste un numero primo compreso tra n 2 ed (n + 1)2 . Scrivere un programma ANSI C che chiede all’utente quale congettura intende considerare e poi la verifica dopo aver acquisito dalla tastiera il numero di sequenze da generare nel primo caso (per ogni sequenza il programma stampa sullo schermo solo i primi 10 numeri), il numero naturale dispari maggiore di 5 nel secondo caso (il programma stampa sullo schermo i tre numeri primi), n ≥ 1 nel terzo caso (il programma stampa sullo schermo il numero primo compreso)
+La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri primi, la sequenza dei numeri naturali ottenuta calcolando il valore assoluto della differenza tra ciascuna coppia di numeri primi consecutivi nella precedente sequenza, l’ulteriore sequenza dei numeri naturali ottenuta calcolando il valore assoluto della differenza tra ciascuna coppia di numeri consecutivi nella precedente sequenza, e così via, il primo numero di ciascuna delle sequenze ottenute è sempre 1. La congettura debole di Goldbach asserisce che tutti i numeri naturali dispari maggiori di 5 possono essere scritti come somma di tre numeri primi. La congettura di Legendre asserisce che per ogni \begin{math}
+    
+n \in N \end{math} tale che \begin{math}  n \geq 1 \end{math} esiste un numero primo compreso tra \begin{math} n^2 \end{math}ed \begin{math}(n + 1)^2 \end{math} . Scrivere un programma ANSI C che chiede all’utente quale congettura intende considerare e poi la verifica dopo aver acquisito dalla tastiera il numero di sequenze da generare nel primo caso (per ogni sequenza il programma stampa sullo schermo solo i primi 10 numeri), il numero naturale dispari maggiore di 5 nel secondo caso (il programma stampa sullo schermo i tre numeri primi), n ≥ 1 nel terzo caso (il programma stampa sullo schermo il numero primo compreso)
 
 %NOTA CONTROLLA MEGLIO I CARATTERI !!!
 
@@ -29,22 +31,22 @@ La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri 
     \item[2.1] \underline{Dati di Ingreso del Problema :} 
     \large\\I Dati di Ingresso del problema variano a seconda della congettura che si vuole risolvere; in tal senso si possono individuare i seguenti dati : 
     \begin{enumerate}
-        \item[a.] Congettura di Gilbreath : questa congettura, per essere risolta, implica un solo dato di ingresso, ovvero un numero che indichi quante sequenze creare.
+        \item[a.] Congettura di Gilbreath : questa congettura, per essere risolta, implica un solo dato di ingresso, ovvero un numero che indichi quante sequenze creare e \begin{math} > 0\end{math}.
         \item[b.] Congettura di Goldbach : il dato di ingresso per questa congettura è un numero dispari \begin{math} > 5\end{math}.
-        \item[c.] Congettura di Legendre : la congettura implica come dato di ingresso un numero \begin{math} n \geq 1 \in \mathcal{N}\end{math}.
+        \item[c.] Congettura di Legendre : la congettura implica come dato di ingresso un numero \begin{math} n \geq 1\end{math}.
     \end{enumerate}
     \Large\item[2.2] \underline{Dati di Uscita del Problema : }
     \large \\I dati di uscita del problema variano, anch'essi, in base alla congettura che si vuole verificare, il seguente elenco illustra i dati di uscita per ogni congettura : 
     \begin{enumerate}
         \item[a.] Congettura di Gilbreath : questa congettura implica come dato di uscita delle sequenze, il cui numero deve essere pari al dato di ingresso per questa congettura. 
-        \item[b.] Congettura di Goldbach : i dati di uscita sono tre numeri \begin{math} x, y, z\end{math} la cui somma deve essere uguale al dato di ingresso per questa congettura.
+        \item[b.] Congettura di Goldbach : i dati di uscita sono tre numeri \begin{math} x, y, z\end{math} la cui somma deve essere uguale al dato di ingresso.
         \item[c.] Congettura di Legendre : il dato di uscita per questa congettura è un numero primo \begin{math} x\end{math}.
      \end{enumerate}
     \Large\item[2.3] \underline{Relazioni Intercorrenti : }
-    \large \\Le relazioni intercorrenti, ovvero come ottenere i dati di uscita attesi, partendo dai dati di ingresso variano a seconda della congettura scelta, qui di seguito sono enumerate le relazioni intercorrenti a seconda della congettura scelta : 
+    \large \\Le relazioni intercorrenti, le quali indicano come ottenere i dati di uscita attesi, partendo dai dati di ingresso, variano a seconda della congettura scelta, qui di seguito sono enumerate le relazioni intercorrenti a seconda della congettura scelta : 
     \begin{enumerate}
-        \item[a.] Congettura di Gilbreath : questa congettura si considera verificata quando ciascuna sequenza generata inizia con il numero \begin{math}1\end{math}, se nessuna o solo parte delle sequenze generati non inizia con il sudetto valore, allora la congettura non può considerarsi verificata.
-       \item[b.] Congettura di Goldbach : la congettura si considera verificata quando, dato un numero dispari \begin{math}n > 5\end{math} esso è esprimibile come somma di tre numeri primi \begin{math} x, y, x | x + y + z = n\end{math}.
+        \item[a.] Congettura di Gilbreath : questa congettura si considera verificata quando ciascuna sequenza generata inizia con il numero \begin{math}1\end{math}, se nessuna o solo parte delle sequenze generate non inizia con il sudetto valore, allora la congettura non può considerarsi verificata.
+       \item[b.] Congettura di Goldbach : la congettura si considera verificata quando, dato un numero dispari \begin{math}n > 5\end{math} esso è esprimibile come somma di tre numeri primi \begin{math} x, y, x : x + y + z = n\end{math}.
         \item[c.] Congettura di Legendre : la congettura si considera verificata quando un numero primo \begin{math} x \end{math} rispetta la seguente proprietà :  \begin{math}n^2 \leq x \leq (n + 1)^2\end{math}.
     \end{enumerate}
 \end{enumerate}
@@ -52,57 +54,38 @@ La congettura di Gilbreath asserisce che se si esaminano la sequenza dei numeri 
 \begin{center}
     \section{Progettazione dell'Algoritmo}
 \end{center}
-
-    \begin{enumerate}
+        \begin{enumerate}
     \Large \item[3.1] \underline{Strutture e Rappresentazione dei Dati : } 
     \large \\I dati di ingresso e quelli di uscita di cui l'algoritmo si poggia sono rappresentati nel seguente modo : 
     \begin{enumerate}
-        \item[a.] Dati di Ingresso : I dati di ingresso delle congetture sono rappresentati su un tipo strutturato composto da tre campi, corrispondenti al numero dei dati di ingresso per le congetture; i il tipo dei campi è omogeneo, in quanto i dati di ingresso per ciascuna congettura sono tutti di tipo intero. Inoltre abbiamo deciso di rappresentare i dati di ingresso che corrispondono agli identificativi delle congetture - utili per selezionare la congettura da risolvere - tramite delle macro costanti, in questo modo si permette una più rapida ed efficacie manutenione del programmma.
-        \item[b.] Dati di Uscita : I dati di uscita sono per lo più numeri primi; abbiamo quindi deciso di memorizzare la sequenza di numeri primi generata in una lista doppiamente concatenata, in questo modo avendo a disposizione l'indirizzo di memoria della testa della lista concatenata, è facile fare accesso a tutti i suoi elementi. la lista doppiamente concatenata è composta da oggetti aventi tre attributi, ovvero due attributi puntatore e un attributo chiave, dove quest'ultimo conterrà un numero primo. 
+        \item[a.] Dati di Ingresso : I dati di ingresso delle congetture sono rappresentati tramite un tipo strutturato composto da tre campi, corrispondenti al numero dei dati di ingresso per le congetture; il tipo dei campi è omogeneo, in quanto i dati di ingresso sono tutti di tipo intero. Inoltre abbiamo deciso di rappresentare i dati di ingresso corrispondenti agli identificativi delle congetture - utili per selezionare la congettura da risolvere - tramite delle macro costanti, in questo modo si permette una più rapida ed efficacie manutenione del programmma.
+        \item[b.] Dati di Uscita : I dati di uscita sono per lo più numeri primi; abbiamo quindi deciso di memorizzare la sequenza di numeri primi generata in una lista doppiamente concatenata, in questo modo, avendo a disposizione l'indirizzo di memoria della testa della lista concatenata, è facile fare accesso a tutti i suoi elementi. la lista doppiamente concatenata è composta da oggetti aventi tre attributi, ovvero due attributi puntatore e un attributo chiave, dove quest'ultimo conterrà un numero primo. 
     \end{enumerate}
     \Large \item[3.2] \underline{Passi dell'Algoritmo : }
-    \large\\ qui di seguito sono riportati i passi principali dell'algoritmo, descritti tramite linguaggio naturale : 
+    \large\\ Qui di seguito sono riportati i passi principali dell'algoritmo, descritti tramite linguaggio naturale : 
 
     % INIZIO ALGORITMO 
-    \begin{algorithm} [hbt!]
-    \caption{Passi Principali dell'Algoritmo}
-    \begin{algorithmic}
-    \State Acquisire e Validare l'identificativo della congettura scelto dall'utente;
-    \State Creare la sequenza di numeri primi e memorizzarla in una lista doppiamente concatenata;
-    \If{la congettura scelta é quella di Gilbreath}
-    \State acquisisci e valida i dati di ingresso per essa;
-    \State verifica la congettura di Gilbreath, generando un numero $n$ \State di sequenze partendo dalla sequenza di numeri primi generata;
-    \ElsIf{la congettura scelta é quella di Goldbach}
-    \State acquisci e valida i dati di ingresso per essa;
-    \State verifica la congettura di Goldbach, trovando dalla \State sequenza di numeri primi generata, tre elementi \State la cui somma sia uguale al dato di ingresso;
-    \Else
-    \State acquisici e valida i dati di ingresso per la congettura di Legendre;
-    \State verifica la congettura di Legendre, trovando un numero primo - \State dalla sequenza di numeri primi generata - compreso tra \State $n^2$ e $(n + 1)^2$;
-    \EndIf 
-    
-     
-    \end{algorithmic}
-    \end{algorithm}
-
-
-
-    
+ 
+   \begin{algorithmic}
+   \State 1. Acquisizione dell'indentificativo della congettura;
+   \State 2. Genera la sequenza di numeri primi;
+   \State 3. Se la congettura scelta é Gilbreath : 
+   \State 3.1.  Acquisisci e valida i dati di ingresso;
+   \State 3.2.   Invoca la funzione per verificare la congettura; 
+   \State 4. Se la congettura scelta é Goldbach : 
+   \State 4.1.   Acquisisci e valida i dati di ingresso;
+   \State 4.2.   Invoca la funzione per verificare la congettura;
+   \State 5. Altrimenti : 
+   \State  5.1.   Acquisisci e valida i dati di ingresso;
+   \State  5.2.   Invoca la funzione per verificare la congettura.
+   \end{algorithmic}
+ 
 \end{enumerate}
-
+    
 \newpage
 \begin{center}
     \section{Implementazione dell'Algoritmo}
 \end{center}
-
-\newpage
-\begin{center}
-    \section{Testing del Programma}
-\end{center}
-
-\newpage
-\begin{center}
-    \section{Verifica del Software}
-\end{center}
+File Sorgente : verifica\textunderscore congetture.c
 \end{document}
-
 
