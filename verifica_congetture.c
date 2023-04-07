@@ -71,25 +71,20 @@ int main(void) {
 	testa_lista = genera_numeri_primi();
 
 	switch (congettura_scelta) {
-
+			
 		case CONG_GILB_SCELTA:
-			congettura_gilbreath(accesso, 
-					     testa_lista);
+			congettura_gilbreath(accesso, testa_lista);
 			break;
 
 		case CONG_GOLD_SCELTA:
-			congettura_goldbach(accesso, 
-					    testa_lista);
+			congettura_goldbach(accesso, testa_lista);
 			break;
 
 		case CONG_LEGE_SCELTA:
-			congettura_legendre(accesso,
-					    testa_lista);
+			congettura_legendre(accesso, testa_lista);
 			break;
-
 	}
 
-	
 	return (0);
 }
 
@@ -163,13 +158,11 @@ sequenza_numeri_primi_t  *genera_numeri_primi(void) {
 	oggetto_lista->numero_primo = valore_generato;
 
 	for (valore_generato = 2; (valore_generato <= MAX_NPRIMI_GEN); valore_generato++) {
-
 		for (contatore = 2, primo = 1; (contatore < sqrt(valore_generato)); contatore++)
-
 			if (valore_generato % contatore == 0)
 				primo = 0;
 		if (primo) {
-
+			
 			oggetto_lista->precedente = oggetto_lista;
 			oggetto_lista = oggetto_lista->successivo = (sequenza_numeri_primi_t *)malloc(sizeof(sequenza_numeri_primi_t));
 			oggetto_lista->numero_primo = valore_generato;
