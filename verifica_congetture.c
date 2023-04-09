@@ -155,9 +155,8 @@ sequenza_numeri_primi_t  *genera_numeri_primi(void) {
 
 	/* generazione dei numeri, verifica di primalita' e memo. in lista concat. */
 	testa_lista_concatenata = oggetto_lista = (sequenza_numeri_primi_t *)malloc(sizeof(sequenza_numeri_primi_t));
-	oggetto_lista->numero_primo = valore_generato;
 
-	for (valore_generato = 2; (valore_generato <= MAX_NPRIMI_GEN); valore_generato++) {
+	for (oggetto_lista->numero_primo = valore_generato = 2; (valore_generato <= MAX_NPRIMI_GEN); valore_generato++) {
 		for (contatore = 2, primo = 1; (contatore < sqrt(valore_generato)); contatore++)
 			if (valore_generato % contatore == 0)
 				primo = 0;
