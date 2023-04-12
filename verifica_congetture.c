@@ -210,7 +210,7 @@ void congettura_goldbach(congetture_t accesso, sequenza_numeri_primi_t *testa_li
 
 			if ((contatore == 2) && (tmp_somma == accesso.numero_cong_gold)) {
 				printf("Numeri la cui somma e' uguale a %d : %d, %d, %d \n", accesso.numero_cong_gold, tmp_pv, tmp_sv, tmp_tv);
-				contatore++;
+				++riconoscimento;
 			}
 			
 			oggetto_lista = oggetto_lista->successivo;
