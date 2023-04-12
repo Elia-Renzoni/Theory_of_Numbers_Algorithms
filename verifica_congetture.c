@@ -24,19 +24,14 @@
 #define  MAX_NPRIMI_GEN    1000
 
 typedef struct {
-
 	int  numero_sequenze,
 	     numero_cong_gold,
 	     numero_cong_lege;
-
 } congetture_t;
 
 typedef struct seq_numeri_p {
-
 	int                  numero_primo;
-	struct seq_numeri_p *successivo,
-			    *precedente;
-
+	struct seq_numeri_p *successivo, *precedente;
 } sequenza_numeri_primi_t;
 
 /* dichiarazione delle funzioni */
