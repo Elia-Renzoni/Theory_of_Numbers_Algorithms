@@ -43,12 +43,9 @@ typedef struct seq_numeri_p {
 
 int                      acquisisci_valida(void);
 sequenza_numeri_primi_t *genera_numeri_primi(void);
-void                     congettura_gilbreath(congetture_t,
-					      sequenza_numeri_primi_t *);
-void                     congettura_goldbach(congetture_t,
-					     sequenza_numeri_primi_t *);
-void                     congettura_legendre(congetture_t,
-					     sequenza_numeri_primi_t *);
+void                     congettura_gilbreath(congetture_t, sequenza_numeri_primi_t *);
+void                     congettura_goldbach(congetture_t, sequenza_numeri_primi_t *);
+void                     congettura_legendre(congetture_t, sequenza_numeri_primi_t *);
 
 /* definizione delle funzioni */
 
@@ -65,7 +62,7 @@ int main(void) {
 	printf("*    [0] -- Congettura di Gilbreath --        *\n");
 	printf("*    [1] -- Congettura di Goldbach  --        *\n");
 	printf("*    [2] -- Congettura di Legendre  --        *\n");
-	printf("***********************************************"\n);
+	printf("***********************************************\n");
 
 	congettura_scelta = acquisisci_valida();
 	testa_lista = genera_numeri_primi();
@@ -73,23 +70,19 @@ int main(void) {
 	switch (congettura_scelta) {
 
 		case CONG_GILB_SCELTA:
-			congettura_gilbreath(accesso, 
-					     testa_lista);
+			congettura_gilbreath(accesso, testa_lista);
 			break;
 
 		case CONG_GOLD_SCELTA:
-			congettura_goldbach(accesso, 
-					    testa_lista);
+			congettura_goldbach(accesso, testa_lista);
 			break;
 
 		case CONG_LEGE_SCELTA:
-			congettura_legendre(accesso,
-					    testa_lista);
+			congettura_legendre(accesso, testa_lista);
 			break;
 
 	}
 
-	
 	return (0);
 }
 
@@ -106,28 +99,24 @@ int acquisisci_valida(void) {
 
 	do {
 		printf("Seleziona una Congettura : \n");
-		valore_scanf = scanf("%d", 
-				     &cong_scelta);
-
+		valore_scanf = scanf("%d", &cong_scelta);
+		
 		switch (cong_scelta) {
 
 			case CONG_GILB_SCELTA:
 				printf("Inserisci il numero di sequenze da generare - (n > 0) :  \n");
-				valore_scanf = scanf("%d", 
-						     &accesso.numero_sequenze);
+				valore_scanf = scanf("%d", &accesso.numero_sequenze);
 				break;
 
 			case CONG_GOLD_SCELTA:
 				printf("Inserisci un numero dispari e > 5 : \n");
-				valore_scanf  = scanf("%d", 
-						      &accesso.numero_cong_gold);
+				valore_scanf  = scanf("%d", &accesso.numero_cong_gold);
 				verifica_numero = accesso.numero_cong_gold % 2;
 				break;
 
 			case CONG_LEGE_SCELTA:
 				printf("Inserisci un numero n naturale >= 1 \n");
-				valore_scanf = scanf("%d", 
-						     &accesso.numero_cong_lege);
+				valore_scanf = scanf("%d", &accesso.numero_cong_lege);
 				break;
 
 		}
@@ -169,7 +158,6 @@ sequenza_numeri_primi_t  *genera_numeri_primi(void) {
 			if (valore_generato % contatore == 0)
 				primo = 0;
 		if (primo) {
-			
 			oggetto_lista->precedente = oggetto_lista;
 			oggetto_lista = oggetto_lista->successivo = (sequenza_numeri_primi_t *)malloc(sizeof(sequenza_numeri_primi_t));
 			oggetto_lista->numero_primo = valore_generato;
@@ -183,13 +171,10 @@ sequenza_numeri_primi_t  *genera_numeri_primi(void) {
 }
 
 
-
 void congettura_gilbreath(congetture_t accesso, sequenza_numeri_primi_t *testa_lista_dc) {
 
 
 	
-
-
 }
 
 
