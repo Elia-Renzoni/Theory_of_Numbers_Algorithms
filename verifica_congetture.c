@@ -18,23 +18,24 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define  CONG_GILB_SCELTA  0
+#define  CONG_GILB_SCELTA  0		
 #define  CONG_GOLD_SCELTA  1
 #define  CONG_LEGE_SCELTA  2
 #define  MAX_NPRIMI_GEN    1000
 
+/* tipo strutturato per le congetture */
 typedef struct {
 	int  numero_sequenze,
 	     numero_cong_gold,
 	     numero_cong_lege;
 } congetture_t;
 
+/* lista doppiamente concatenata, per contenere i numeri primi */
 typedef struct seq_numeri_p {
 	int                  numero_primo;
 	struct seq_numeri_p *successivo, *precedente;
 } sequenza_numeri_primi_t;
 
-/* dichiarazione delle funzioni */
 
 int                      acquisisci_valida(void);
 sequenza_numeri_primi_t *genera_numeri_primi(void);
@@ -42,7 +43,6 @@ void                     congettura_gilbreath(congetture_t, sequenza_numeri_prim
 void                     congettura_goldbach(congetture_t, sequenza_numeri_primi_t *);
 void                     congettura_legendre(congetture_t, sequenza_numeri_primi_t *);
 
-/* definizione delle funzioni */
 
 int main(void) {
 
@@ -81,8 +81,10 @@ int main(void) {
 	return (0);
 }
 
-
-
+/*
+*
+*	funzione per acquisire e validare i dati di ingresso
+*/
 int acquisisci_valida(void) {
 
 	int          cong_scelta;
@@ -132,7 +134,10 @@ int acquisisci_valida(void) {
 
 }	
 
-
+/*
+*
+*	funzione per generare i numeri primi e creare una lista dopp. concatenata
+*/
 sequenza_numeri_primi_t  *genera_numeri_primi(void) {
 
 
@@ -172,7 +177,10 @@ void congettura_gilbreath(congetture_t accesso, sequenza_numeri_primi_t *testa_l
 	
 }
 
-
+/*
+*
+*	funzione per verificare la congettura di Goldbach
+*/
 void congettura_goldbach(congetture_t accesso, sequenza_numeri_primi_t *testa_lista_dp) {
 
 	int 			 tmp_somma,
@@ -216,7 +224,10 @@ void congettura_goldbach(congetture_t accesso, sequenza_numeri_primi_t *testa_li
 
 }
 
-
+/*
+*
+*	funzione per verificare la congettura di Legendre
+*/
 void congettura_legendre(congetture_t accesso, sequenza_numeri_primi_t *testa_lista_dp) {
 
 	int 			 primo_vincolo   = sqrt(accesso.numero_cong_lege, 2);
