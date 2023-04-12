@@ -194,6 +194,7 @@ void congettura_gilbreath(congetture_t accesso, sequenza_numeri_primi_t *testa_l
 	int                      numero_elementi = 0;
 	sequenza_numeri_primi_t *oggetto_lista;
 
+	printf("Prima Sequenza : \n");
 	for (oggetto_lista = testa_lista_dc, contatore = indice = 0; (oggetto_lista != NULL); oggetto_lista = oggetto_lista->successivo, contatore++, indice++) {
 
 		if (contatore == 0) 
@@ -206,6 +207,9 @@ void congettura_gilbreath(congetture_t accesso, sequenza_numeri_primi_t *testa_l
 
 		elementi_seq_gen = (int *)calloc(numero_elementi, sizeof(int));
 		elementi_seq_gen[indice] = differenza;
+		
+		if (contatore <= 10)
+			printf("%d \t", differenza);
 
 	}
 
