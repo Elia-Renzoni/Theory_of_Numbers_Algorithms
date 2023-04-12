@@ -226,7 +226,7 @@ void congettura_legendre(congetture_t accesso, sequenza_numeri_primi_t *testa_li
 	for (oggetto_lista = testa_lista_dp; (oggetto_lista != NULL); oggetto_lista = oggetto_lista->successivo) {
 		
 		if ((primo_vincolo <= oggetto_lista->numero_primo) && (oggetto_lista->numero_primo <= secondo_vincolo))
-			printf("Valore Incluso : %d", oggetto_lista->numero_primo);
+			printf("Valore Incluso : %d\n", oggetto_lista->numero_primo);
 	}
 
 }
