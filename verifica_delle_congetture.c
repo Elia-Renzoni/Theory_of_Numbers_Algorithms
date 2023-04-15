@@ -138,7 +138,7 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 			accesso_struttura.numero_elementi++;
 			accesso_struttura.numeri_primi = (int *)calloc(numero_elementi, sizeof(int));
 			accesso_struttura.numeri_primi[indice] = valore_generato;
-			++indice;
+			indice++;
 		}
 			
 	}
