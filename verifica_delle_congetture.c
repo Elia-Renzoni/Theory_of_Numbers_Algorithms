@@ -150,10 +150,10 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 void congettura_goldbach(congetture_t accesso_struttura){
 
 	int tmp_somma, 
-		tmp_v, 
-		indice, 
-		riconoscimento, 
-		contatore;
+	    tmp_v, 
+	    indice, 
+	    riconoscimento, 
+            contatore;
 
     for (indice = 0; (indice < accesso_struttura.numero_elementi); indice++) {
 		
@@ -170,8 +170,10 @@ void congettura_goldbach(congetture_t accesso_struttura){
 			riconoscimento++;
 		} 
 	} 
+	
 	if (riconoscimento == 0)
 	printf("congettura non verificata.");
+	
 }
 
 
