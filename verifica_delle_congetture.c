@@ -22,12 +22,8 @@
 
 
 typedef struct {
-
-	int  numero_sequenze, 
-	     n_disp_gold, 
-	     n_cong_lege;
+	int  numero_sequenze, n_disp_gold, n_cong_lege;
 	int  numeri_primi[MAX_NUMERI_PRIMI];
-
 } congetture_t;
 
 
