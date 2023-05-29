@@ -153,6 +153,7 @@ void congettura_gilbreath(congetture_t accesso_struttura) {
 	    	visita_pila(cima, differenza)
 	    	for (indice = 0; (indice != 10); indice++) {
 	    		crea_stack_seq_numeri(&cima, differenza[indice]);
+			printf("%d\t", differenza[indice]);
 	    	}
 	    }
 	}
