@@ -145,10 +145,10 @@ void congettura_gilbreath(congetture_t accesso_struttura) {
 
 	printf("Sequenze > \n");
 	for (contatore = 0; (contatore < max_numeri_gen); contatore++) {
-		if (contatore < 10) {
-			valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
-			printf("%d\t", accesso_struttura.numeri_primi[contatore]);
-			crea_stack_seq_numeri(&cima, valore);
+	    if (contatore < 10) {
+		valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
+		printf("%d\t", accesso_struttura.numeri_primi[contatore]);
+		crea_stack_seq_numeri(&cima, valore);
 	    }
 	    else if (contatore >= 10) {
 	    	putchar("\n");
