@@ -16,7 +16,6 @@
 #define MAX_NUMERI_GENE  1000
 #define MAX_NUMERI_PRIMI 168
 
-
 typedef struct {
 	int  numero_sequenze, n_disp_gold, n_cong_lege;
 	int  numeri_primi[MAX_NUMERI_PRIMI];
@@ -26,7 +25,6 @@ typedef struct stack {
 	int numero_gen;
 	struct stack *succ_p;
 } stack_numeri_t;
-
 
 int  acquisisci_valida(congetture_t);
 void sequenza_numeri_primi(congetture_t);
