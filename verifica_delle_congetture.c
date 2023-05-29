@@ -32,7 +32,7 @@ int  acquisisci_valida(congetture_t);
 void sequenza_numeri_primi(congetture_t);
 void congettura_gilbreath(congetture_t);
 void crea_stack_seq_numeri(stack_numeri_t **, int);
-void visita_pila(stack_numeri_t *, int differenza[])
+void visita_pila(stack_numeri_t *, int differenza[]);
 void congettura_goldbach(congetture_t);
 void congettura_legendre(congetture_t);
 
