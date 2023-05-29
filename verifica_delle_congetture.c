@@ -1,10 +1,7 @@
 /*
  *
- *
  *	Autori : Elia Renzoni e Alessio Biagioli
  *	Programma : verifica delle congetture di Gilbreath, Goldbach e Legendre
- *
- *
  *
  * */
 
@@ -12,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
 
 #define CONG_GILB_SCELTA 0
 #define CONG_GOLD_SCELTA 1
@@ -26,10 +22,17 @@ typedef struct {
 	int  numeri_primi[MAX_NUMERI_PRIMI];
 } congetture_t;
 
+typedef struct stack {
+	int numero_gen;
+	struct stack *succ_p;
+} stack_numeri_t;
+
 
 int  acquisisci_valida(congetture_t);
 void sequenza_numeri_primi(congetture_t);
 void congettura_gilbreath(congetture_t);
+void crea_stack_seq_numeri(stack_numeri_t **, int);
+void visita_pila(stack_numeri_t *, int differenza[])
 void congettura_goldbach(congetture_t);
 void congettura_legendre(congetture_t);
 
@@ -65,7 +68,6 @@ int main(void) {
 
 	return (0);
 }
-
 
 int acquisisci_valida(congetture_t accesso_struttura) {
 
@@ -113,7 +115,6 @@ int acquisisci_valida(congetture_t accesso_struttura) {
 	} 
 	while (acquisizione_errata);
 
-
 	return (congettura_scelta);
 
 }
@@ -138,33 +139,52 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 
 void congettura_gilbreath(congetture_t accesso_struttura) {
 
-	int contatore, differenza, elementi_sequenza, indice;
+	stack_numeri_t *cima = NULL;
+	int contatore, max_numeri_gen = accesso_struttura.numero_sequenze * 10;
+	int valore, indice, differenza[10];
 
-	printf("Sequenza : \n");
-	for (contatore = 0; (contatore < 10); contatore++)
-		printf("%d\t", accesso_struttura.numeri_primi[contatore]);
-	
-	if (accesso_struttura.numero_sequenze > 1) {
-		for (contatore = 1, elementi_sequenza = MAX_NUMERI_PRIMI; (contatore < accesso_struttura.numero_sequenze); contatore++, elementi_sequenza--) {
-			printf("\nSequenza : \n");
-			for (indice = 0; (indice < elementi_sequenza); indice++) {
-				differenza = accesso_struttura.numeri_primi[indice] - accesso_struttura.numeri_primi[indice + 1];
-				accesso_struttura.numeri_primi[indice] = differenza;
-				if (indice <= 10)
-					printf("%d\t", differenza);
-			}
-
-		}
+	printf("Sequenze > \n");
+	for (contatore = 0; (contatore < max_numeri_gen); contatore++) {
+		if (contatore < 10) {
+			valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
+			printf("%d\t", accesso_struttura.numeri_primi[contatore]);
+			crea_stack_seq_numeri(&cima, valore);
+	    }
+	    else if (contatore >= 10) {
+	    	putchar("\n");
+	    	visita_pila(cima, differenza)
+	    	for (indice = 0; (indice != 10); indice++) {
+	    		crea_stack_seq_numeri(&cima, differenza[indice]);
+	    	}
+	    }
 	}
 }
 
+void crea_stack_seq_numeri(stack_numeri_t **cima, int val_inserire) {
+
+	stack_numeri_t *nuovo_numero = (stack_numeri_t *)malloc(sizeof(stack_numeri_t));
+	nuovo_numero->numero_gen = valore_inserire;
+	nuovo_numero->succ_p = *cima;
+	*cima = nuovo_numero;
+
+}
+
+void visita_pila(stack_numeri_t *cima, int differenza[]) {
+
+	stack_numeri_t *elemento;
+	int contatore;
+
+	for (elemento = *cima, contatore = 0; 
+			(elemento != NULL || contatore <= 10); 
+		contatore++, elemento = elemento->succ_p) {
+		differenza[contatore] = elemento->numero_gen - elemento->succ_p->numero_gen;
+	}
+
+}
 
 void congettura_goldbach(congetture_t accesso_struttura) {
 
-	int tmp_somma = 0, 
-	    indice,
-	    riconoscimento = 0,
-	    contatore;
+	int tmp_somma = 0, indice, riconoscimento = 0, contatore;
 
 	for (indice = 0; (indice < MAX_NUMERI_PRIMI); indice++) {
 		tmp_somma = accesso_struttura.numeri_primi[indice];
@@ -195,5 +215,3 @@ void congettura_legendre(congetture_t accesso_struttura) {
 			printf("Valore Incluso : %d \n", accesso_struttura.numeri_primi[indice]);
 
 }
-
-
