@@ -15,7 +15,7 @@
 #define CONG_LEGE_SCELTA 2
 #define MAX_NUMERI_GENE  1000
 #define MAX_NUMERI_PRIMI 168
-#define MAX_LUNGH_SEQ 10
+#define MAX_LUNGH_SEQ 	 10
 
 typedef struct {
 	int  numero_sequenze, n_disp_gold, n_cong_lege;
