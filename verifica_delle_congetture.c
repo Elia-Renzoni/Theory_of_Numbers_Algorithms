@@ -15,7 +15,7 @@
 #define CONG_LEGE_SCELTA 2
 #define MAX_NUMERI_GENE  1000
 #define MAX_NUMERI_PRIMI 168
-#define MAX_LUNGH_SEQ 	 10
+#define MAX_LUNGH_SEQ    10
 
 typedef struct {
 	int  numero_sequenze, n_disp_gold, n_cong_lege;
@@ -139,20 +139,23 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 void congettura_gilbreath(congetture_t accesso_struttura) {
 
 	coda_numeri_t *uscita = NULL, *ingresso = NULL;
-	int contatore, max_numeri_gen = accesso_struttura.numero_sequenze * 10;
+	int contatore;
 	int valore, indice, differenza[MAX_LUNGH_SEQ];
+	int numero_stampe = MAX_LUNGH_SEQ;
 
 	printf("Sequenze > \n");
-	for (contatore = 0; (contatore < max_numeri_gen); contatore++) {
-	    if (contatore < 10) {
-		valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
-		printf("%d\t", accesso_struttura.numeri_primi[contatore]);
-		crea_coda_seq_numeri(&uscita, &ingresso, valore);
+	for (contatore = 0; (contatore < accesso_struttura.numero_sequenze); contatore++) {
+	    if (contatore < 1) {
+		for (indice = 0; (indice < numero_stampe); indice++) {
+			valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
+			printf("%d\t", accesso_struttura.numeri_primi[contatore]);
+			crea_coda_seq_numeri(&uscita, &ingresso, valore);
+		}		
 	    }
-	    else if (contatore >= 10) {
+	    else {
 	    	printf("\n");
 	    	crea_nuova_sequenza(uscita, differenza);
-	    	for (indice = 0; (indice <= 10); indice++) {
+	    	for (indice = 0; (indice < numero_stampe--); indice++) {
 	    		crea_coda_seq_numeri(&uscita, &ingresso, differenza[indice]);
 			printf("%d\t", differenza[indice]);
 	    	}
@@ -179,7 +182,7 @@ void crea_nuova_sequenza(coda_numeri_t *uscita, int differenza[]) {
 	int contatore;
 
 	for (elemento = uscita, contatore = 0; 
-			(elemento != NULL || contatore <= 10); 
+			(elemento != NULL || contatore < 10); 
 		contatore++, elemento = elemento->succ_p) {
 		differenza[contatore] = elemento->numero_gen - elemento->succ_p->numero_gen;
 	}
@@ -188,11 +191,10 @@ void crea_nuova_sequenza(coda_numeri_t *uscita, int differenza[]) {
 
 void congettura_goldbach(congetture_t accesso_struttura) {
 
-	long int tmp_somma = 0, indice, riconoscimento = 0, contatore;
+	int tmp_somma = 0, indice, riconoscimento = 0, contatore;
 
 	for (indice = 0; (indice < MAX_NUMERI_PRIMI); indice++) {
-		tmp_somma = accesso_struttura.numeri_primi[indice];
-		for (contatore = indice + 1; (contatore < indice + 3); contatore++) 
+		for (contatore = indice; (contatore < indice + 2); contatore++) 
 			tmp_somma += accesso_struttura.numeri_primi[contatore];
 		if (tmp_somma == accesso_struttura.n_disp_gold) {
 			printf("Numeri la cui somma e' uguale a %d : %d, %d, %d\n", accesso_struttura.n_disp_gold,
