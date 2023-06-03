@@ -122,7 +122,7 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 	    i;
 
 	for (valore_generato = 2, contatore = 0; (valore_generato < MAX_NUMERI_GENE); valore_generato++) {
-        	for (i = 2, primo = 1; ((i < sqrt(valore_generato)) && (primo != 0)); i++) {
+        	for (i = 2, primo = 1; ((i < valore_generato) && (primo != 0)); i++) {
    	        	if(valore_generato % i == 0)
    	            		primo = 0;
         	}   
