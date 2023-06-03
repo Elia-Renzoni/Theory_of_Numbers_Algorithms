@@ -5,7 +5,6 @@
  *
  * */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -18,20 +17,22 @@
 #define MAX_LUNGH_SEQ    10
 
 typedef struct {
-	int  numero_sequenze, n_disp_gold, n_cong_lege;
-	int  numeri_primi[MAX_NUMERI_PRIMI];
+	int  numero_sequenze, 
+	     n_disp_gold, 
+	     n_cong_lege;
+	int  *numeri_primi;
 } congetture_t;
 
-typedef struct coda {
+typedef struct pila {
 	int numero_gen;
-	struct coda *succ_p;
-} coda_numeri_t;
+	struct pila *succ_p;
+} pila_numeri_t;
 
 int  acquisisci_valida(congetture_t);
 void sequenza_numeri_primi(congetture_t);
 void congettura_gilbreath(congetture_t);
-void crea_coda_seq_numeri(coda_numeri_t **, coda_numeri_t **,  int);
-void crea_nuova_sequenza(coda_numeri_t *, int differenza[]);
+void crea_pila_seq_numeri(pila_numeri_t **,  int);
+void crea_nuova_sequenza(pila_numeri_t *, int differenza[]);
 void congettura_goldbach(congetture_t);
 void congettura_legendre(congetture_t);
 
@@ -48,8 +49,10 @@ int main(void) {
 	printf("       [2] - Legendre           \n");
 	printf("********************************\n");
 
+	accesso_struttura.numeri_primi = (int *)calloc(MAX_NUMERI_PRIMI, sizeof(int));
 	congettura_scelta = acquisisci_valida(accesso_struttura);
 	sequenza_numeri_primi(accesso_struttura);
+
 
 	switch (congettura_scelta) {
 		
@@ -84,20 +87,20 @@ int acquisisci_valida(congetture_t accesso_struttura) {
 
 			case CONG_GILB_SCELTA:
 				printf("Inserisci il numero di sequenze da generare ( >= 1 ) : \n");
-				esito_lettura = scanf("%d", &accesso_struttura.numero_sequenze);
+				esito_lettura = scanf("%d", &(accesso_struttura.numero_sequenze));
 				acquisizione_errata = esito_lettura_id != 1 || esito_lettura != 1 || accesso_struttura.numero_sequenze < 1;
 				break;
 
 			case CONG_GOLD_SCELTA:
 				printf("Inserisci un numero dispari e > 5 : \n");
-				esito_lettura = scanf("%d", &accesso_struttura.n_disp_gold);
+				esito_lettura = scanf("%d", &(accesso_struttura.n_disp_gold));
 				verifica_dispari = accesso_struttura.n_disp_gold % 2;
-				acquisizione_errata = esito_lettura_id != 1 || esito_lettura != 1 || accesso_struttura.numero_sequenze < 5 || verifica_dispari == 0;
+				acquisizione_errata = esito_lettura_id != 1 || esito_lettura != 1 || accesso_struttura.n_disp_gold < 5 || verifica_dispari == 0;
 				break;
 			
 			case CONG_LEGE_SCELTA:
 				printf("Inserisci un numero >= 1 : \n");
-				esito_lettura = scanf("%d", &accesso_struttura.n_cong_lege);
+				esito_lettura = scanf("%d", &(accesso_struttura.n_cong_lege));
 				acquisizione_errata = esito_lettura_id != 1 || esito_lettura != 1 || accesso_struttura.n_cong_lege < 1;
 				break;
 			
@@ -123,70 +126,64 @@ void sequenza_numeri_primi(congetture_t accesso_struttura) {
 	int contatore, 
 	    primo, 
 	    valore_generato,
-	    indice;
+	    i;
 
-	for (valore_generato = 2, indice = 0; (valore_generato <= MAX_NUMERI_GENE); valore_generato++) {
-		for (contatore = 2, primo = 1; (contatore < (int)sqrt(valore_generato)); contatore++) 
-			if (valore_generato % contatore == 0)
-				primo = 0;
-		if (primo == 1) {
-			accesso_struttura.numeri_primi[indice] = valore_generato;
-			indice++;
-		}		
-	}
+	for (valore_generato = 2, contatore = 0; (valore_generato < MAX_NUMERI_GENE); valore_generato++) {
+        	for (i = 2, primo = 1; ((i < sqrt(valore_generato)) && (primo != 0)); i++) {
+   	        	if(valore_generato % i == 0)
+   	            		primo = 0;
+        	}   
+        	if (primo == 1) {
+            		accesso_struttura.numeri_primi[contatore] = valore_generato;
+            		contatore++;
+        	}
+   	}
+
 }
 
 void congettura_gilbreath(congetture_t accesso_struttura) {
 
-	coda_numeri_t *uscita = NULL, *ingresso = NULL;
+	pila_numeri_t *cima = NULL;
 	int contatore;
-	int valore, indice, differenza[MAX_LUNGH_SEQ];
+	int indice, differenza[MAX_LUNGH_SEQ];
 	int numero_stampe = MAX_LUNGH_SEQ;
 
-	printf("Sequenze > \n");
+	printf("Sequenze da generare %d > \n", accesso_struttura.numero_sequenze);
 	for (contatore = 0; (contatore < accesso_struttura.numero_sequenze); contatore++) {
 	    if (contatore < 1) {
-		for (indice = 0; (indice < numero_stampe); indice++) {
-			valore = accesso_struttura.numeri_primi[contatore + 1] - accesso_struttura.numeri_primi[contatore];
-			printf("%d\t", accesso_struttura.numeri_primi[contatore]);
-			crea_coda_seq_numeri(&uscita, &ingresso, valore);
-		}		
+			for (indice = 0; (indice < numero_stampe); indice++) {
+				printf("%d\t", accesso_struttura.numeri_primi[indice]);
+				crea_pila_seq_numeri(&cima, accesso_struttura.numeri_primi[indice]);
+			}		
 	    }
-	    else {
+	    else if (contatore >= 1) {
 	    	printf("\n");
-	    	crea_nuova_sequenza(uscita, differenza);
+	    	crea_nuova_sequenza(cima, differenza);
 	    	for (indice = 0; (indice < numero_stampe--); indice++) {
-	    		crea_coda_seq_numeri(&uscita, &ingresso, differenza[indice]);
-			printf("%d\t", differenza[indice]);
+	    		crea_pila_seq_numeri(&cima, differenza[indice]);
+				printf("%d\t", differenza[indice]);
 	    	}
 	    }
 	}
 }
 
-void crea_coda_seq_numeri(coda_numeri_t **uscita, coda_numeri_t **ingresso, int val_inserire) {
+void crea_pila_seq_numeri(pila_numeri_t **cima, int val_inserire) {
 
-	coda_numeri_t *nuovo_elem = (coda_numeri_t *)malloc(sizeof(coda_numeri_t));
+	pila_numeri_t *nuovo_elem = (pila_numeri_t *)malloc(sizeof(pila_numeri_t));
 	nuovo_elem->numero_gen = val_inserire;
-	nuovo_elem->succ_p = NULL;
-	if (*ingresso != NULL)
-		(*ingresso)->succ_p = nuovo_elem;
-	else
-		*uscita = nuovo_elem;
-	*ingresso = nuovo_elem;
+	nuovo_elem->succ_p = *cima;
+	*cima = nuovo_elem;
 
 }
 
-void crea_nuova_sequenza(coda_numeri_t *uscita, int differenza[]) {
+void crea_nuova_sequenza(pila_numeri_t *cima, int differenza[]) {
 
-	coda_numeri_t *elemento;
+	pila_numeri_t *elemento;
 	int contatore;
 
-	for (elemento = uscita, contatore = 0; 
-			(elemento != NULL || contatore < 10); 
-		contatore++, elemento = elemento->succ_p) {
+	for (elemento = cima, contatore = 0; (elemento != NULL || contatore < 10); contatore++, elemento = elemento->succ_p) 
 		differenza[contatore] = elemento->numero_gen - elemento->succ_p->numero_gen;
-	}
-
+	
 }
 
 void congettura_goldbach(congetture_t accesso_struttura) {
@@ -214,10 +211,15 @@ void congettura_legendre(congetture_t accesso_struttura) {
 
 	int primo_vincolo   = pow(accesso_struttura.n_cong_lege, 2),
 	    secondo_vincolo = pow(accesso_struttura.n_cong_lege + 1, 2), 
-	    indice;
+	    indice,
+	    esito_verifica = 0;
 
 	for (indice = 0; (indice < MAX_NUMERI_PRIMI); indice++) 
-		if (primo_vincolo <= accesso_struttura.numeri_primi[indice] && accesso_struttura.numeri_primi[indice] <= secondo_vincolo) 
+		if (primo_vincolo <= accesso_struttura.numeri_primi[indice] && accesso_struttura.numeri_primi[indice] <= secondo_vincolo) {
 			printf("Valore Incluso : %d \n", accesso_struttura.numeri_primi[indice]);
+			esito_verifica++;
+		}
+	if (esito_verifica == 0)
+		printf("Congettura non verificata !\n");
 
 }
